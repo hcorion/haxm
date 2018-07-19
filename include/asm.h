@@ -86,7 +86,9 @@ void ASMCALL asm_fxrstor(mword *addr);
 void ASMCALL asm_cpuid(union cpuid_args_t *state);
 
 void ASMCALL __nmi(void);
+#ifndef __linux__
 uint32 ASMCALL __fls(uint32 bit32);
+#endif
 
 uint64 ia32_rdmsr(uint32 reg);
 void ia32_wrmsr(uint32 reg, uint64 val);

@@ -194,6 +194,10 @@ struct system_desc_t;
 #include "windows/hax_types_windows.h"
 #endif
 
+#ifdef __linux__
+#include "linux/hax_types_linux.h"
+#endif
+
 /* Common typedef for all platform */
 typedef uint64 hax_pa_t;
 typedef uint64 hax_pfn_t;

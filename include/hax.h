@@ -266,4 +266,8 @@ int hax_em64t_enabled(void);
 #include "windows/hax_windows.h"
 #endif
 
+#ifdef __linux__
+#include "linux/hax_linux.h"
+#endif
+
 #endif  // HAX_H_

@@ -697,6 +697,16 @@ static inline void vmx_vmwrite(struct vcpu_t *vcpu, const char *name,
             vmwrite(vcpu, GUEST_##seg##_LIMIT, (val).limit);       \
             vmwrite(vcpu, GUEST_##seg##_AR, tmp_ar);               \
         })
+#elif __linux__
+#define VMWRITE_SEG(vcpu, seg, val) ({                             \
+            uint32_t tmp_ar = val.ar;                              \
+            if (tmp_ar == 0)                                       \
+                tmp_ar = 0x10000;                                  \
+            vmwrite(vcpu, GUEST_##seg##_SELECTOR, (val).selector); \
+            vmwrite(vcpu, GUEST_##seg##_BASE, (val).base);         \
+            vmwrite(vcpu, GUEST_##seg##_LIMIT, (val).limit);       \
+            vmwrite(vcpu, GUEST_##seg##_AR, tmp_ar);               \
+        })
 #endif
 
 #define VMWRITE_DESC(vcpu, desc, val)                              \
